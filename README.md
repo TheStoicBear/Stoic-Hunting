@@ -2,7 +2,7 @@
 
 --------------------------
 
-<h1 align="center"><a href="https://stoic.tebex.io/package/6109455">Click this to download for FREE!</a></h1>
+
 <h1 align="center"><a href="https://www.youtube.com/watch?v=N1S4f8cZQ4o">Youtube Preview!</a></h1>
 
 --------------------------
@@ -54,7 +54,6 @@ Welcome to Stoic-Hunting, an immersive hunting experience designed to bring you 
 
 Prepare yourself for an unforgettable journey into the heart of Stoic-Hunting, where every hunt is an opportunity to connect with nature and test your skills as a hunter. Immerse yourself in the beauty of the wild and experience the true essence of the hunter's spirit.
 
-Feel free to copy and customize this Readme for your Stoic-Hunting adventure!
 ![image](https://github.com/TheStoicBear/Stoic-Hunting/assets/112611821/16d0bc45-6acb-474b-bf3a-6d60ca67b376)](https://github.com/TheStoicBear/Stoic-Hunting/assets/112611821/16d0bc45-6acb-474b-bf3a-6d60ca67b376)
 
 ![chicken_skin](https://github.com/TheStoicBear/Stoic-Hunting/assets/112611821/40be93a2-dbe1-4988-a30c-bff3f38fba14)
