@@ -1,0 +1,12 @@
+-- RegisterServerEvent('AddChairBack')
+-- AddEventHandler('AddChairBack', function()
+--     -- Add the "chair" item to the player's inventory
+--     local success, response = exports.ox_inventory:AddItem(source, 'chair', 1)
+
+--     if not success then
+--         -- Handle the error response
+--         print("Failed to add chair item to inventory: " .. response)
+--     else
+--         print("Chair item added to inventory successfully")
+--     end
+-- end)

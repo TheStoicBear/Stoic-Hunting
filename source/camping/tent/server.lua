@@ -1,0 +1,12 @@
+-- RegisterServerEvent('AddTentBack')
+-- AddEventHandler('AddTentBack', function()
+--     -- Add the "tent" item to the player's inventory
+--     local success, response = exports.ox_inventory:AddItem(source, 'tent', 1)
+
+--     if not success then
+--         -- Handle the error response
+--         print("Failed to add tent item to inventory: " .. response)
+--     else
+--         print("tent item added to inventory successfully")
+--     end
+-- end)
