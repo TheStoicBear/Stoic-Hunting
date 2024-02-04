@@ -1,3 +1,5 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
 RegisterServerEvent('sellMeat')
 AddEventHandler('sellMeat', function(npcModel)
     local player = source
