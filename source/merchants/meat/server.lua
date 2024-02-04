@@ -1,8 +1,7 @@
 RegisterServerEvent('sellMeat')
 AddEventHandler('sellMeat', function(npcModel)
-    local player = source
-    local tPlayer = NDCore.getPlayer(player)
-    local inventoryId = tPlayer.getData("id")
+    local _source = source
+    local xPlayer = ESX.GetPlayerFromId(_source)
     local success = false
 
     local animalMeat = {
@@ -20,50 +19,41 @@ AddEventHandler('sellMeat', function(npcModel)
     local totalIncome = 0
 
     for _, meatName in ipairs(animalMeat) do
-        local item = exports.ox_inventory:Search(player, 'count', meatName)
+        local itemCount = xPlayer.getInventoryItem(meatName).count
 
-        if item > 0 then
-            local sellPrice = CalculateMeatSellPrice(meatName, item)
+        if itemCount > 0 then
+            local sellPrice = CalculateMeatSellPrice(meatName, itemCount)
             totalIncome = totalIncome + sellPrice
 
             -- Remove the found items
-            exports.ox_inventory:RemoveItem(player, meatName, item, nil, nil, function(removed, response)
-                if removed then
-                    success = true
-                else
-                    print("Failed to remove " .. meatName .. " meat: " .. response)
-                end
-            end)
+            xPlayer.removeInventoryItem(meatName, itemCount)
+            success = true
 
             local notificationData = {
-                title = "Sold " .. item .. " " .. meatName .. " meat",
+                title = "Sold " .. itemCount .. " " .. meatName .. " meat",
                 description = "Received $" .. sellPrice,
                 type = 'success'
             }
-            TriggerClientEvent('ox_lib:notify', player, notificationData)
+            TriggerClientEvent('ox_lib:notify', _source, notificationData)
         else
             print("No " .. meatName .. " meat found in inventory")
         end
     end
 
     if totalIncome > 0 then
-        local moneyAdded = tPlayer.addMoney("cash", totalIncome, "Sold meat")
-        if not moneyAdded then
-            print("Failed to add money to the player's cash account.")
-        else
-            local totalNotificationData = {
-                title = "Total income from selling meat:",
-                description = "Received $" .. totalIncome,
-                type = 'success'
-            }
-            TriggerClientEvent('ox_lib:notify', player, totalNotificationData)
-        end
+        xPlayer.addMoney(totalIncome)
+        local totalNotificationData = {
+            title = "Total income from selling meat:",
+            description = "Received $" .. totalIncome,
+            type = 'success'
+        }
+        TriggerClientEvent('ox_lib:notify', _source, totalNotificationData)
     else
         local noItemsNotificationData = {
             title = "No meat sold, no income generated",
             type = 'error'
         }
-        TriggerClientEvent('ox_lib:notify', player, noItemsNotificationData)
+        TriggerClientEvent('ox_lib:notify', _source, noItemsNotificationData)
     end
 end)
 
@@ -74,4 +64,3 @@ function CalculateMeatSellPrice(itemName, itemCount)
     print("Item: " .. itemName .. ", Price: $" .. price) -- Add this line for debugging
     return price * itemCount
 end
-
