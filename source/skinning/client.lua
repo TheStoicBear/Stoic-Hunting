@@ -1,55 +1,44 @@
--- Function to check if a ped is dead
-function isPedDead(ped)
-    return IsEntityDead(ped)
-end
-
 -- Function to add a model as targetable with specific options
-function addModelWithOptions(model, options)
-    exports.ox_target:addModel(model, options)
+function addModelWithOptions(models, options)
+    exports['qb-target']:AddTargetModel(models, options)
 end
 
 -- Event handler to check and add models
 RegisterNetEvent('checkAndAddTargetable')
 AddEventHandler('checkAndAddTargetable', function(pedModels)
     for _, model in ipairs(pedModels) do
-        if isPedDead(model) then
+        local ped = GetPed(model)
+        if ped ~= 0 and IsPedDeadOrDying(ped) then
             local options = {
-                label = "Skin Animal",
-                icon = "fa-brands fa-wolf-pack-battalion",
-                distance = 2.0,
-                canInteract = function(entity, distance, coords, name)
-                    return isPedDead(entity)
-                end,
-                onSelect = function(data)
-                    TriggerEvent('startSkinning', data.model)
-                end
+                options = {
+                    {
+                        type = "client",
+                        event = "startSkinning",
+                        icon = "fas fa-dna",
+                        label = "Skin Animal",
+                        canInteract = function(entity, distance, data)
+                            return IsPedDeadOrDying(entity)
+                        end
+                    }
+                },
+                distance = 2.5
             }
             addModelWithOptions(model, options)
         end
     end
 end)
 
--- Function to get the ped by model name
-function GetPed(modelName)
-    for _, ped in ipairs(GetGamePool('CPed')) do
-        if GetEntityModel(ped) == GetHashKey(modelName) then
-            return ped
-        end
-    end
-    return 0
-end
-
 -- Event handler for skinning
 RegisterNetEvent('startSkinning')
-AddEventHandler('startSkinning', function(pedModel)
+AddEventHandler('startSkinning', function(data)
+    local pedModel = data.model
     -- Add your logic to start skinning
     TriggerEvent('playSkinningAnimation', pedModel)
 end)
 
 -- Event handler for playing skinning animation
 RegisterNetEvent('playSkinningAnimation')
-AddEventHandler('playSkinningAnimation', function()
-    print("Starting skinning animation...")
+AddEventHandler('playSkinningAnimation', function(data)
     local playerPed = PlayerPedId()
     TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_GARDENER_PLANT", 0, true)
     Citizen.Wait(5000) -- Adjust duration as needed
@@ -77,40 +66,12 @@ AddEventHandler('playSkinningAnimation', function()
     end
 end)
 
--- Function to get the closest ped
-function GetClosestPed()
-    print("Searching for closest ped...")
-    local playerPed = PlayerPedId()
-    local playerCoords = GetEntityCoords(playerPed)
-
-    local closestPed = 0
-    local closestDistance = -1
-
+-- Function to get the ped by model name
+function GetPed(modelName)
     for _, ped in ipairs(GetGamePool('CPed')) do
-        if IsPedDeadOrDying(ped) then
-            local pedCoords = GetEntityCoords(ped)
-            local distance = #(pedCoords - playerCoords)
-
-            if closestDistance == -1 or distance < closestDistance then
-                closestPed = ped
-                closestDistance = distance
-            end
+        if GetEntityModel(ped) == GetHashKey(modelName) then
+            return ped
         end
     end
-
-    print("Closest ped found:", closestPed)
-    return closestPed
+    return 0
 end
-
--- Function to get the animal name based on the ped model
-function GetAnimalName(model)
-    local animalName = Config.AnimalNames[model] or "Unknown"
-    print("Animal name:", animalName)
-    return animalName
-end
-
--- Add the targetable options when the resource starts
-Citizen.CreateThread(function()
-    local pedModels = Config.TargetableModels
-    TriggerEvent('checkAndAddTargetable', pedModels)
-end)
