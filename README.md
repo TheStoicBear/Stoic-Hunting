@@ -1,3 +1,6 @@
+For Andy from NDFrammework
+I did not make, I do not claim rights and it's Open Source.
+
 ![STOIC (12)](https://github.com/TheStoicBear/Stoic-Hunting/assets/112611821/8a1a3368-2343-40d4-9316-2a7d5e93dc3d)
 
 --------------------------
