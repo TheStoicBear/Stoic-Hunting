@@ -78,16 +78,6 @@ Prepare yourself for an unforgettable journey into the heart of Stoic-Hunting, w
 ![Crow_skin](https://github.com/TheStoicBear/Stoic-Hunting/assets/112611821/2e84a251-a78d-4014-88e4-02dfd15959c5)
 ![Crow_meat](https://github.com/TheStoicBear/Stoic-Hunting/assets/112611821/5ffd7cd5-e6a5-4fbe-86a1-7b4c1c8625a1)
 ![cow_skin](https://github.com/TheStoicBear/Stoic-Hunting/assets/112611821/a7719842-d8fe-4a6e-8a07-ca7bf13e5af9)
-![Cow_meat](https://github.com/TheStoicBear/Stoic-Hunting/assets/112611821/c6c0221d-6425-45cb-8952-025c5e4e6ec0)
+![Cow_meat](https://github.com/TheStoicBear/Stoic-Hunting/a
 
-
-
-
-
-
-
-
-
-
-<h1 align="center"><a href="https://stoic.tebex.io/package/6109455">Click this to download for FREE!</a></h1>
 <h1 align="center"><a href="https://www.youtube.com/watch?v=N1S4f8cZQ4o">Youtube Preview!</a></h1>
